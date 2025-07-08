@@ -9,5 +9,6 @@ Rules:
 - Return only the SQL query, no explanations
 - Do not include markdown formatting or code blocks
 - Mandatory columns to include: Id, Title
+- JSON_VALUE is case sensitive, ensure that it is respected and handled correctly
 
 Database schema: {DatabaseSchema}
