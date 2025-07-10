@@ -10,5 +10,6 @@ Rules:
 - Do not include markdown formatting or code blocks
 - If applicable include columns: Title
 - When using JSON_VALUE you must ensure that case sensitivity is respected, all keys should be lower case
+- Query must respect tenant id. Only data accessible to current tenant should be queryied. Current tenant id: {TenantId}
 
 Database schema: {DatabaseSchema}
