@@ -11,6 +11,7 @@ Rules:
 - If applicable include columns: Title
 - When using JSON_VALUE you must ensure that case sensitivity is respected, all keys should be lower case
 - Query must respect tenant id. Only data accessible to current tenant should be queryied. Current tenant id: {TenantId}
+- Query must respect current user id if applicable. Current user id: {CurrentUserId}
 - Query must be readonly and should not contain UPDATE, DELETE or INSERT statements
 
 Query specifics:
