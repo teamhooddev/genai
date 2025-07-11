@@ -12,12 +12,6 @@ Rules:
 - When using JSON_VALUE you must ensure that case sensitivity is respected, all keys should be lower case
 - Query must respect tenant id. Only data accessible to current tenant should be queryied. Current tenant id: {TenantId}
 
-Query specifics:
-- `Boards` are containers for items, but their name is saved in corresponding `Views` entry. `Views` have `ContentReference` column that for `Boards` holds stringified `Boards.Id`. To correctly get board data by title use query like this:
-```sql
-SELECT * FROM Boards B
-JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
-WHERE Title = 'Board'
-```
+
 
 Database schema: {DatabaseSchema}
