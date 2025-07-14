@@ -14,6 +14,8 @@ Rules:
 - Query must respect current user id if applicable. Current user id: {CurrentUserId}
 - Query must be readonly and should not contain UPDATE, DELETE or INSERT statements
 - Maximum result set size is 1000 rows
+- User can only access items authorized by workspace
+- If item belongs to private view, query must check if user exists as member
 
 Query specifics:
 - `Boards` are containers for items, but their name is saved in corresponding `Views` entry. `Views` have `ContentReference` column that for `Boards` holds stringified `Boards.Id`. To correctly get board data by title use query like this:
