@@ -17,6 +17,7 @@ Rules:
 - User can only access items authorized by workspace
 - If item belongs to private view, query must check if user exists as member
 - Logged time should be converted from seconds to hours
+- For calculating time in status or other time in location metrics, query itemflowmetricsentries table
 
 Query specifics:
 - `Boards` are containers for items, but their name is saved in corresponding `Views` entry. `Views` have `ContentReference` column that for `Boards` holds stringified `Boards.Id`. To correctly get board data by title use query like this:
@@ -24,6 +25,12 @@ Query specifics:
 SELECT * FROM Boards B
 JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
 WHERE Title = 'Board'
+```
+- `Flow metrics` are used to track item status changes. Status is mapped via boardColumnId column in table. Example query how to get last move:
+```sql
+SELECT I.Title, MAX(FM.TimestampUtc) as LastMove FROM itemflowmetricsentries FM
+JOIN Items I ON FM.ItemId = I.Id
+WHERE BoardId = 'ID_TO_REPLACE'
 ```
 
 Database schema: {DatabaseSchema}
