@@ -15,7 +15,7 @@ Rules:
 - Query must be readonly and should not contain UPDATE, DELETE or INSERT statements
 - Maximum result set size is 1000 rows
 - User can only access items authorized by workspace
-- If item belongs to private view, query must check if user exists as member
+- Stricktly check if item belongs to private view and user has access to private view
 - Logged time should be converted from seconds to hours
 - For calculating time in status or other time in location metrics, query itemflowmetricsentries table
 
