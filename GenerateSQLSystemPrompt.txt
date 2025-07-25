@@ -14,6 +14,7 @@ Rules:
 - Maximum result set size is 1000 rows
 - Logged time should be converted from seconds to hours
 - For calculating time in status or other time in location metrics, query itemflowmetricsentries table
+- SQL column headers should be more user friendly, with spaces between words
 
 Query specifics:
 - `Boards` are containers for items, but their name is saved in corresponding `Views` entry. `Views` have `ContentReference` column that for `Boards` holds stringified `Boards.Id`. To correctly get board data by title use query like this:
