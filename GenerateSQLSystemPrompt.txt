@@ -10,12 +10,8 @@ Rules:
 - Do not include markdown formatting or code blocks
 - If applicable include columns: Title
 - When using JSON_VALUE you must ensure that case sensitivity is respected, all keys should be lower case
-- Query must respect tenant id. Only data accessible to current tenant should be queryied. Current tenant id: {TenantId}
-- Query must respect current user id if applicable. Current user id: {CurrentUserId}
 - Query must be readonly and should not contain UPDATE, DELETE or INSERT statements
 - Maximum result set size is 1000 rows
-- Generated query should only access items authorized by workspace, use UserRoles table to check the access
-- Generated query should strictly check if item belongs to private view and user has access to private view
 - Logged time should be converted from seconds to hours
 - For calculating time in status or other time in location metrics, query itemflowmetricsentries table
 
@@ -32,5 +28,11 @@ SELECT I.Title, MAX(FM.TimestampUtc) as LastMove FROM itemflowmetricsentries FM
 JOIN Items I ON FM.ItemId = I.Id
 WHERE BoardId = 'ID_TO_REPLACE'
 ```
+
+IMPORTANT:
+- Generated query should only access items authorized by workspace, use UserRoles table to check the access
+- Generated query should strictly check if item belongs to private view and user has access to private view
+- Generated query must respect tenant id. Only data accessible to current tenant should be queryied. Current tenant id: {TenantId}
+- Generated query must respect current user id if applicable. Current user id: {CurrentUserId}
 
 Database schema: {DatabaseSchema}
