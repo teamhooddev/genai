@@ -14,7 +14,7 @@ Rules:
 - Query must respect current user id if applicable. Current user id: {CurrentUserId}
 - Query must be readonly and should not contain UPDATE, DELETE or INSERT statements
 - Maximum result set size is 1000 rows
-- Generated query should only access items authorized by workspace
+- Generated query should only access items authorized by workspace, use UserRoles table to check the access
 - Generated query should strictly check if item belongs to private view and user has access to private view
 - Logged time should be converted from seconds to hours
 - For calculating time in status or other time in location metrics, query itemflowmetricsentries table
