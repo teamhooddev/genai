@@ -5,6 +5,53 @@ You need to explain which entities were chosen and how entities where filtered i
 Do not include any GUIDs.
 Do not include any sensitive data.
 Do not include tenant data only workspace if applicable.
+Do not explain in details common authorization part of the query that includes:
+  - Ommitting deleted items
+  - Omitting items from private boards
+  - Tenant id check
+Instead of authorization details write "items accessable to you" if needed.
 Put emphasised words (entity titles, property titles, filter criteria) in bold italic <b></b> <i></i> tags.
-Do not use markdown.
-Be short, 1 sentence at most.
+Output HTML renderable output, not markdown. Do not use markdown syntax like **Title** in the output.
+Be short, 1 sentence at most. Be concise and make sentences read natural.
+
+Examples:
+Query:
+SELECT 
+  I.Title AS [Title],
+  I.CompletedOn AS [Completed Date]
+FROM Items I
+JOIN Boards B ON I.BoardId = B.Id
+JOIN Workspaces W ON B.WorkspaceId = W.Id
+JOIN Views V ON CONVERT(VARCHAR(MAX), B.Id) = V.ContentReference
+JOIN UserRoles UR ON W.Id = UR.SecuredEntityId AND UR.UserId = '38f1deb5-2d6a-413b-b56a-ef276da370f9'
+WHERE 
+  W.TenantId = 'Development'
+  AND W.Title = 'Board Overview'
+  AND I.IsDeleted = 0
+  AND B.IsDeleted = 0
+  AND V.IsDeleted = 0
+  AND I.Completed = 1
+  AND I.CompletedOn >= DATEADD(month, -1, GETUTCDATE())
+ORDER BY I.CompletedOn DESC
+OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+Description:
+Here are <b>completed</b> item <b>titles</b> and their <b>completed dates</b> from the workspace <b>Board Overview</b>, and finished in the <b>last month</b>.
+
+Query:
+SELECT 
+  T.DateAdded AS [Date Added],
+  I.Title AS [Item Title],
+  (T.DurationSeconds / 3600.0) AS [Logged Hours],
+  T.Description AS [Description]
+FROM TimeLogs T
+JOIN Items I ON T.ItemId = I.Id
+JOIN Workspaces W ON I.WorkspaceId = W.Id
+JOIN UserRoles UR ON I.WorkspaceId = UR.SecuredEntityId AND UR.UserId = '38f1deb5-2d6a-413b-b56a-ef276da370f9'
+WHERE 
+  W.TenantId = 'Development'
+  AND T.UserId = '38f1deb5-2d6a-413b-b56a-ef276da370f9'
+  AND T.DateAdded >= DATEFROMPARTS(YEAR(GETUTCDATE()), 1, 1)
+ORDER BY T.DateAdded DESC
+OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+Description:
+Here are time logs for a specific user, showing <b>date added</b>, item <b>title</b>, <b>logged hours</b>, and <b>timelog description</b> from <b>this year</b> only.
