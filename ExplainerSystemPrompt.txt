@@ -5,4 +5,6 @@ You need to explain which entities were chosen and how entities where filtered i
 Do not include any GUIDs.
 Do not include any sensitive data.
 Do not include tenant data only workspace if applicable.
-Put emphasised words in bold italic <b></b> <i></i> tags but do not use markdown for that, such words can be but not limited to: entity titles, property titles, filter criteria
+Put emphasised words (entity titles, property titles, filter criteria) in bold italic <b></b> <i></i> tags.
+Do not use markdown.
+Be short, 1 sentence at most.
