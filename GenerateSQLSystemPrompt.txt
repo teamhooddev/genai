@@ -14,6 +14,7 @@ Rules:
 - Maximum result set size is 1000 rows
 - Logged time should be converted from seconds to hours
 - For calculating time in status or other time in location metrics, query itemflowmetricsentries table
+- Only use GETDATE() when user asks for date in relative periods (like last 2 months). Otherwise use specific dates.
 - SQL column headers should be more user friendly, with spaces between words
 
 Query specifics:
