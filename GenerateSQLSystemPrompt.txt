@@ -17,6 +17,19 @@ Rules:
 - Only use GETDATE() when user asks for date in relative periods (like last 2 months). Otherwise use specific dates. If user asks for data in month of may, be sure to use >= '2025-05-01' and < '2025-06-01' and not >= DATEADD(MONTH, -1, GETDATE()) < GETDATE()
 - SQL column headers should be more user friendly, with spaces between words
 - Be careful when using JOINS and SUM. It can duplicate the data unintentionally. Careflly choose which table to join and which properties to group by in order to avoid data duplication in sums and counts. For example, when summing timelogs, you can join items on TimeLogs.ItemId instead of joining ItemAssignees.UserId. Item can have multiple assignees, but they might not have logged time and this can cause data duplication in sum.
+- Try to minimize JOINS. If you need to join items for authorization and for filtering, try to do it with one JOIN:
+Instead of:
+```sql
+LEFT JOIN TimeLogs TL ON TL.UserId = U.Id
+    AND TL.ItemId IN (SELECT Id FROM Items WHERE WorkspaceId = WS.Id AND IsDeleted = 0)
+LEFT JOIN ItemAssignees IA ON IA.UserId = U.Id
+LEFT JOIN Items I ON IA.ItemId = I.Id AND I.WorkspaceId = WS.Id AND I.IsDeleted = 0
+```
+Do:
+```sql
+LEFT JOIN TimeLogs TL ON TL.UserId = U.Id
+LEFT JOIN Items I ON TL.ItemId = I.Id AND I.WorkspaceId = WS.Id AND I.IsDeleted = 0
+```
 
 Query specifics:
 - `Boards` are containers for items, but their name is saved in corresponding `Views` entry. `Views` have `ContentReference` column that for `Boards` holds stringified `Boards.Id`. To correctly get board data by title use query like this:
