@@ -14,6 +14,7 @@ Instead of authorization details write "items accessable to you" if needed.
 Put emphasised words (entity titles, property titles, filter criteria) in bold italic <b></b> <i></i> tags.
 Output HTML renderable output, not markdown. Do not use markdown syntax like **Title** in the output.
 Be short, 1 sentence at most. Be concise and make sentences read natural.
+If some specific entites are used to filter data by title/name, be sure to mention not only that title/name, but also what type of entity is it.
 
 Examples:
 Query:
