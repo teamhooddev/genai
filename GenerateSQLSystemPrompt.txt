@@ -16,7 +16,7 @@ Rules:
 - For calculating time in status or other time in location metrics, query itemflowmetricsentries table
 - Only use GETDATE() when user asks for date in relative periods (like last 2 months). Otherwise use specific dates. If user asks for data in month of may, be sure to use >= '2025-05-01' and < '2025-06-01' and not >= DATEADD(MONTH, -1, GETDATE()) < GETDATE()
 - SQL column headers should be more user friendly, with spaces between words
-- Be careful when using JOINS and aggregation methods (like SUM, AVERAGE and COUNT). Joins can duplicate the data being aggregated. Think carefully how to use minimal joins to achieve the result. If needed, use sub-queries to filter and aggregate different columns.
+- When aggregating data from multiple tables (like TimeLogs and ItemAssignees), use subqueries to calculate each metric separately to avoid data duplication from joins. Never join multiple one-to-many relationships in the same query when aggregating.
 - Today is {Today}
 
 Query specifics:
