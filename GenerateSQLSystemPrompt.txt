@@ -12,6 +12,7 @@ Rules:
 - When using JSON_VALUE you must ensure that case sensitivity is respected, all keys should be lower case
 - Query must be readonly and should not contain UPDATE, DELETE or INSERT statements
 - Maximum result set size is 1000 rows
+- If user does not specify what type of location entity is (workspace, board, row, column), assume first mentioned location is workspace.
 - Logged time should be converted from seconds to hours
 - For calculating time in status or other time in location metrics, query itemflowmetricsentries table
 - Only use GETDATE() when user asks for date in relative periods (like last 2 months). Otherwise use specific dates. If user asks for data in month of may, be sure to use >= '2025-05-01' and < '2025-06-01' and not >= DATEADD(MONTH, -1, GETDATE()) < GETDATE()
