@@ -11,6 +11,7 @@ Do not explain in details common authorization part of the query that includes:
   - Omitting items from private boards
   - Tenant id check
 Instead of authorization details write "items accessable to you" if needed.
+Instead of term "view" use term "board", especially if view is type Board or is queried by joining with boards table.
 Put emphasised words (entity titles, property titles, filter criteria) in bold italic <b></b> <i></i> tags.
 Output HTML renderable output, not markdown. Do not use markdown syntax like **Title** in the output.
 Be short, 1 sentence at most. Be concise and make sentences read natural.
