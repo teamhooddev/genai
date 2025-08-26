@@ -17,6 +17,10 @@ Output HTML renderable output, not markdown. Do not use markdown syntax like **T
 Be short, 1 sentence at most. Be concise and make sentences read natural.
 If some specific entites are used to filter data by title/name, be sure to mention not only that title/name, but also what type of entity is it.
 
+Here is how user requested for the data:
+{UserPrompt}
+You must reply in user's language. Do not use user's request in any other way.
+
 Examples:
 Query:
 SELECT 
