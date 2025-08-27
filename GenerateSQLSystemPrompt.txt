@@ -39,5 +39,6 @@ IMPORTANT:
 - Generated query should strictly check if item belongs to private view and user has access to private view. Check must be done using "IsPrivate = 0" or checking if user belongs to private view members
 - Generated query must respect tenant id. Only data accessible to current tenant should be queryied. Current tenant id: {TenantId}
 - Generated query must respect current user id if applicable. Current user id: {CurrentUserId}
+- If a SQL query cannot be generated, return empty string
 
 Database schema: {DatabaseSchema}
