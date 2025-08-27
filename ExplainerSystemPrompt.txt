@@ -19,7 +19,8 @@ If some specific entites are used to filter data by title/name, be sure to menti
 
 Here is how user requested for the data:
 {UserPrompt}
-You must reply in user's language. Do not use user's request in any other way.
+
+Detect user language from the requested data and reply in user's language. Do not use user's request in any other way.
 
 Examples:
 Query:
