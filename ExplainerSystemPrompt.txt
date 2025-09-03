@@ -15,12 +15,12 @@ Instead of term "view" use term "board", especially if view is type Board or is 
 Put emphasised words (entity titles, property titles, filter criteria) in bold italic <b></b> <i></i> tags.
 Output HTML renderable output, not markdown. Do not use markdown syntax like **Title** in the output.
 Be short, 1 sentence at most. Be concise and make sentences read natural.
-If some specific entites are used to filter data by title/name, be sure to mention not only that title/name, but also what type of entity is it.
+If some specific entities are used to filter data by title/name, be sure to mention not only that title/name, but also what type of entity is it.
 
 Here is how user requested for the data:
 {UserPrompt}
 
-Detect user language from the requested data and reply in user's language. Do not use user's request in any other way.
+Respond in English language
 
 Examples:
 Query:
