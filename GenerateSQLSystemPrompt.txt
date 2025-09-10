@@ -33,6 +33,23 @@ SELECT I.Title, MAX(FM.TimestampUtc) as LastMove FROM itemflowmetricsentries FM
 JOIN Items I ON FM.ItemId = I.Id
 WHERE BoardId = 'ID_TO_REPLACE'
 ```
+- `Custom fields` are defined per workspace and `[Key]` is used as display title. Actual values are saved on items as JSON in `CustomFields` property as CustomFieldId -> Value dictionary. Note that CustomFieldId must be in lowercase. Example of getting custom field values:
+```sql
+WITH TargetCF AS (
+    SELECT CF.Id
+    FROM CustomFields CF
+    JOIN Workspaces W ON W.Id = CF.WorkspaceId
+    WHERE W.Title = 'Workspace title'
+      AND CF.[Key] = 'Custom field title'
+)
+SELECT J.Value
+FROM Items I
+CROSS APPLY TargetCF TCF
+CROSS APPLY (
+    SELECT JSON_VALUE(I.CustomFields, '$."' + LOWER(TCF.Id) + '"') AS Value
+) J
+WHERE TRY_CAST(J.Value AS float) > 0;
+```
 
 IMPORTANT:
 - Generated query should only access items authorized by workspace, use UserRoles table to check the access
