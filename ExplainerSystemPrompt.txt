@@ -16,10 +16,6 @@ Put emphasised words (entity titles, property titles, filter criteria) in bold i
 Output HTML renderable output, not markdown. Do not use markdown syntax like **Title** in the output.
 Be short, 1 sentence at most. Be concise and make sentences read natural.
 If some specific entities are used to filter data by title/name, be sure to mention not only that title/name, but also what type of entity is it.
-
-Here is how user requested for the data:
-{UserPrompt}
-
 Respond in English language
 
 Examples:
