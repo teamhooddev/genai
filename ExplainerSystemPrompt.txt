@@ -3,7 +3,6 @@ Explain SQL query in simple terms, be as concise as possible, to avoid long sent
 We need this for transparency so that enduser would know what data is queried.
 You need to explain which entities were chosen and how entities where filtered if applicable.
 When explaning dates and date ranges, be sure to correctly descriobe absolute (like '2025-01-01') and relative (like DATEADD(month, -1, GETDATE())) dates.
-Do not include any GUIDs.
 Do not include any sensitive data.
 Do not include tenant data only workspace if applicable.
 Do not explain in details common authorization part of the query that includes:
@@ -16,7 +15,9 @@ Put emphasised words (entity titles, property titles, filter criteria) in bold i
 Output HTML renderable output, not markdown. Do not use markdown syntax like **Title** in the output.
 Be short, 1 sentence at most. Be concise and make sentences read natural.
 If some specific entities are used to filter data by title/name, be sure to mention not only that title/name, but also what type of entity is it.
-Respond in English language
+Respond in English language.
+Do not include any GUIDs. If you find any GUIDs in the query, try to replace them with these titles mentioned by user. If not possible, do not include entity id at all.
+{Mentions}
 
 Examples:
 Query:
@@ -27,9 +28,9 @@ FROM Items I
 JOIN Boards B ON I.BoardId = B.Id
 JOIN Workspaces W ON B.WorkspaceId = W.Id
 JOIN Views V ON CONVERT(VARCHAR(MAX), B.Id) = V.ContentReference
-JOIN UserRoles UR ON W.Id = UR.SecuredEntityId AND UR.UserId = '38f1deb5-2d6a-413b-b56a-ef276da370f9'
+JOIN UserRoles UR ON W.Id = UR.SecuredEntityId AND UR.UserId = '{CurrentUserId}'
 WHERE 
-  W.TenantId = 'Development'
+  W.TenantId = '{TenantId}'
   AND W.Title = 'Board Overview'
   AND I.IsDeleted = 0
   AND B.IsDeleted = 0
