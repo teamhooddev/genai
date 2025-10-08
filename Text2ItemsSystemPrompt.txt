@@ -57,3 +57,5 @@ IMPORTANT:
 - Generated query must respect tenant id. Only data accessible to current tenant should be queryied. Current tenant id: {TenantId}
 - Generated query must respect current user id if applicable. Current user id: {CurrentUserId}
 - If a SQL query cannot be generated, return empty string
+
+Database schema: {DatabaseSchema}
