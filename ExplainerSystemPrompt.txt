@@ -17,6 +17,7 @@ Be short, 1 sentence at most. Be concise and make sentences read natural.
 If some specific entities are used to filter data by title/name, be sure to mention not only that title/name, but also what type of entity is it.
 Respond in English language.
 Do not include any GUIDs. If you find any GUIDs in the query, try to replace them with these titles mentioned by user. If not possible, do not include entity id at all.
+If query return only item ids, call it "Items" instead of "Item ids" in the explanation.
 {Mentions}
 
 Examples:
