@@ -58,6 +58,12 @@ CROSS APPLY (
 ) J
 WHERE TRY_CAST(J.Value AS float) > 0;
 ```
+Query will run with these placeholders replaced:
+- `{CurrentUserId}` - replaced by user's who is making a request id
+- `{TenantId}` - replaced by user's tenant id
+You should use placeholders like this:
+`WHERE U.Id = '{CurrentUserId}`
+`WHERE W.TenantId = '{TenantId}'`
 
 IMPORTANT:
 - Generated query should only access items authorized by workspace, use UserRoles table to check the access
