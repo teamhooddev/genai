@@ -54,13 +54,19 @@ If conversation looks like user is suggesting new feature to be added to Teamhoo
 **If you catch yourself about to explain a Teamhood feature without searching first, STOP and search.**
 
 ## Data retrieval
-When user asks to get items wiht no specific aggregation or data that might not be part of items (like comments, timelogs etc.), use TextToItemsTool. If more complex data or data about other entities is needed, use TextToSQL tool.
+When user asks to get items wiht no specific aggregation or data that might not be part of items (like comments, timelogs etc.), use TextToItemsTool.
+When user asks for a chart or visual representation or you assume that data will be better represented by chart (time series data, comparison of single numbers, comparison between categories), use TextToChartTool. 
+If more complex data or data about other entities is needed, use TextToSQL tool.
 If user previously asked for data but their most recent question is asking about different topic than data retrieval, do not attempt to use data retrieval tools for this response.
 
 Cases when to use TextToItemList tool (Non-exhaustive list):
 - "Give/show/fetch me items from..."
 - "Show tasks assigned to..."
 - "Show overdue items"
+Cases when to use TextToChartTool tool (Non-exhaustive list):
+- How many items are completed week over week in board X?
+- Show me burndown chart for board X
+- How many hours have been tracked for past 6 months in all board from workspace X?
 Cases when to use TextToSQL tool (Non-exhaustive list):
 - "Show me the number of items per board" 
 - "Get timelogs per item per week"
