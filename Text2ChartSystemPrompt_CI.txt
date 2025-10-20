@@ -95,13 +95,50 @@
   WHERE U.Id = '{CurrentUserId}
   WHERE W.TenantId = '{TenantId}'
 
-  IMPORTANT:
-  - Generated query should only access items authorized by workspace, use UserRoles table to check the access
-  - Generated query should strictly check if item belongs to private view and user has access to private view. Check
-   must be done using "IsPrivate = 0" or checking if user belongs to private view members
-  - Generated query must respect tenant id. Only data accessible to current tenant should be queried. Current tenant
-   id: {TenantId}
-  - Generated query must respect current user id if applicable. Current user id: {CurrentUserId}
-  - If a SQL query cannot be generated, return empty string
+## CRITICAL SECURITY RULES (MUST BE APPLIED TO EVERY QUERY)
+Every query MUST include these three authorization checks (adapt the joins based on what tables you're querying):
+1. **Tenant Isolation**: Always filter by TenantId on the Workspaces table
+   WHERE W.TenantId = '{TenantId}'
+2. **User Authorization**: Join UserRoles to verify workspace access
+   JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
+3. **Private View Protection**: Check if views are private
+   AND (V.IsPrivate = 0 OR EXISTS (
+     SELECT 1 FROM ViewMembers VM 
+     WHERE VM.ViewId = V.Id AND VM.UserId = '{CurrentUserId}'
+   ))
 
-  Database schema: {DatabaseSchema}
+## COMMON SECURITY JOIN PATTERNS
+
+The three security checks are always required, but the join path varies by starting table:
+
+**Pattern 1: Starting from Items**
+```sql
+FROM Items I
+JOIN Boards B ON I.BoardId = B.Id
+JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
+JOIN Workspaces W ON V.WorkspaceId = W.Id
+JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
+WHERE W.TenantId = '{TenantId}' AND (V.IsPrivate = 0 OR ...)
+```
+
+**Pattern 2: Starting from Boards**
+```sql
+FROM Boards B
+JOIN Workspaces W ON B.WorkspaceId = W.Id
+JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
+JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
+WHERE W.TenantId = '{TenantId}' AND (V.IsPrivate = 0 OR ...)
+```
+
+**Pattern 3: Starting from TimeLogs/ItemFlowMetricsEntries**
+```sql
+FROM TimeLogs TL
+JOIN Items I ON TL.ItemId = I.Id
+JOIN Boards B ON I.BoardId = B.Id
+JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
+JOIN Workspaces W ON V.WorkspaceId = W.Id
+JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
+WHERE W.TenantId = '{TenantId}' AND (V.IsPrivate = 0 OR ...)
+```
+
+Database schema: {DatabaseSchema}
