@@ -87,7 +87,7 @@ FROM Items I
 JOIN Boards B ON I.BoardId = B.Id
 JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
 JOIN Workspaces W ON V.WorkspaceId = W.Id
-JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
+JOIN UserRoles UR ON UR.SecuredEntityId = W.Id AND UR.UserId = '{CurrentUserId}'
 WHERE W.TenantId = '{TenantId}' AND (V.IsPrivate = 0 OR ...)
 ```
 
@@ -96,7 +96,7 @@ WHERE W.TenantId = '{TenantId}' AND (V.IsPrivate = 0 OR ...)
 FROM Boards B
 JOIN Workspaces W ON B.WorkspaceId = W.Id
 JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
-JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
+JOIN UserRoles UR ON UR.SecuredEntityId = W.Id AND UR.UserId = '{CurrentUserId}'
 WHERE W.TenantId = '{TenantId}' AND (V.IsPrivate = 0 OR ...)
 ```
 
@@ -107,7 +107,7 @@ JOIN Items I ON TL.ItemId = I.Id
 JOIN Boards B ON I.BoardId = B.Id
 JOIN Views V ON CONVERT(VARCHAR(MAX),B.Id) = V.ContentReference
 JOIN Workspaces W ON V.WorkspaceId = W.Id
-JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
+JOIN UserRoles UR ON UR.SecuredEntityId = W.Id AND UR.UserId = '{CurrentUserId}'
 WHERE W.TenantId = '{TenantId}' AND (V.IsPrivate = 0 OR ...)
 ```
 
