@@ -1,0 +1,56 @@
+name: Sync CI Files to Production
+
+on:
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  sync-files:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+      
+      - name: Copy CI files to production files
+        run: |
+          # Find all _CI.txt files and copy them to non-_CI versions
+          for ci_file in *_CI.txt; do
+            if [ -f "$ci_file" ]; then
+              # Get the base filename without _CI suffix
+              base_file="${ci_file/_CI.txt/.txt}"
+              
+              echo "Copying $ci_file to $base_file"
+              cp "$ci_file" "$base_file"
+            fi
+          done
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add *.txt
+          git commit -m "Sync CI files to production files"
+          git push origin master
+      
+      - name: Summary
+        run: |
+          if [ "${{ steps.check_changes.outputs.has_changes }}" == "true" ]; then
+            echo "✅ Files synchronized successfully"
+          else
+            echo "ℹ️ No changes needed - files already in sync"
+          fi
