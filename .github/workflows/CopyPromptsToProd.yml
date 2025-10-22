@@ -6,6 +6,9 @@ on:
 jobs:
   sync-files:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     
     steps:
       - name: Checkout repository
@@ -38,19 +41,29 @@ jobs:
             echo "Changes detected"
           fi
       
-      - name: Commit and push changes
+      - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add *.txt
-          git commit -m "Sync CI files to production files"
-          git push origin main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Sync CI files to production files"
+          branch: sync-ci-files-${{ github.run_number }}
+          delete-branch: true
+          title: "Sync CI files to production"
+          body: |
+            This PR synchronizes the content from `_CI.txt` files to their production counterparts.
+            
+            ### Files updated:
+            - All `*_CI.txt` files copied to `*.txt` files
+            
+            **Triggered by:** @${{ github.actor }}
+            **Workflow run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          labels: automated
       
       - name: Summary
         run: |
           if [ "${{ steps.check_changes.outputs.has_changes }}" == "true" ]; then
-            echo "✅ Files synchronized successfully"
+            echo "✅ Pull request created successfully"
           else
             echo "ℹ️ No changes needed - files already in sync"
           fi
