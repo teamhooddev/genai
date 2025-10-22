@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: main
           fetch-depth: 0
       
       - name: Copy CI files to production files
@@ -45,7 +45,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add *.txt
           git commit -m "Sync CI files to production files"
-          git push origin master
+          git push origin main
       
       - name: Summary
         run: |
