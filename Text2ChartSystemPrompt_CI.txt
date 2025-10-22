@@ -23,16 +23,40 @@
   - SQL column headers should be more user friendly, with spaces between words
 
   Chart data format rules:
-  - For LINE and BAR charts: First column should contain labels (categories/x-axis values) named 'Label', 'Name',
-  'Date', 'Month', 'Category', or 'X'. Remaining columns should contain numeric values to be plotted as separate
-  datasets
-  - For DOUGHNUT charts: Two columns expected - one for labels (named 'Label', 'Name', or 'Category') and one for
-  numeric values (named 'Value', 'Count', 'Total', or 'Amount')
-  - For BUBBLE charts: Three numeric columns expected - 'X', 'Y', and 'R' (radius) or 'Size'
+  For LINE and BAR charts:
+    - 2 COLUMNS (single series): 
+      * Column 1: X-axis labels (dates, categories, names, etc.)
+      * Column 2: Numeric values
+      Example (simplified): SELECT StartDate, SUM(Estimation) FROM Items GROUP BY StartDate
+    
+    - 3 COLUMNS (multiple series from grouped data):
+      * Column 1: X-axis labels (dates, categories, etc.)
+      * Column 2: Series identifier (user names, tags, custom fields, etc.)
+      * Column 3: Numeric values
+      Example (simplified): SELECT IStartDate, U.FirstName, COUNT(*) FROM Items I JOIN Users U ON U.Id = I.ReportUserId GROUP BY I.StartDate, U.FirstName
+  
+  For DOUGHNUT charts (2 columns only):
+    - Column 1: Segment labels (string)
+    - Column 2: Numeric values (numeric)
+  
+  For BUBBLE charts:
+    - 3 COLUMNS (single series):
+      * Column 1: X value (numeric)
+      * Column 2: Y value (numeric)
+      * Column 3: Bubble size (numeric)
+      Example (simplified): SELECT Duration, Budget, Estimation FROM Items
+    
+    - 4 COLUMNS (multiple series):
+      * Column 1: X value (numeric)
+      * Column 2: Series identifier (group by clause)
+      * Column 3: Y value (numeric)
+      * Column 4: Bubble size (numeric)
+      Example (simplified): SELECT I.Duration, U.FirstName, I.Budget, I.Estimation FROM Items I JOIN Users U ON U.Id = I.ReportUserId
+
   - All numeric columns should return numbers (INT, FLOAT, DECIMAL), not strings
   - Label columns should return meaningful text values
-  - Order results logically (e.g., chronologically for time series, alphabetically for categories)
-  - Aggregate data appropriately for the chart type (e.g., GROUP BY for time periods or categories)
+  - Order results logically (e.g., chronologically for time series, alphabetically for series)
+  - Aggregate data appropriately for the chart type
 
   Domain rules
   - When user does not specify the type of location entity, you MUST assume the first mentioned location is a
