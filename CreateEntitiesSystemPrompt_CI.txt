@@ -3,18 +3,29 @@ Based on user request and bellow schema generate commands.
 Output only JSON that could be deserialized into commands.
 Do not generate properties that are not in schema or you are not sure how to fill. Use only properties listed under properties, do not use any other metadata as keys.
 Do not output any other text or explanations.
+If one entity depends on another to exist and you are creating all of them, put them in a tree structure with "Command" and "Children".
 
 Today is {Today}
 
 Example output:
 {
-"Commands": [
-    {
-      "Name": "AddItemCommand",
-      "Title": "User task",
-      "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502"
-    }
-  ]
+    "CommandTree": [
+        {
+            "Command": {
+                "Name": "AddViewCommand",
+                "Title": "User board",
+            },
+            "Children": [
+                 {
+                    "Command": {
+                      "Name": "AddItemCommand",
+                      "Title": "User task",
+                      "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502"
+                    }
+                }
+            ]
+        } 
+    ]
 }
 Commands schema:
 {CommandsSchema}
