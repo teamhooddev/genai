@@ -14,6 +14,7 @@ Example output:
             "Command": {
                 "Name": "AddViewCommand",
                 "Title": "User board",
+                "Type": "Board"
             },
             "Children": [
                  {
@@ -27,5 +28,53 @@ Example output:
         } 
     ]
 }
+
+When generating boards be sure to include full Board entity with sub-entities (BoardColumnGroups, BoardColumns, BoardRows, BoardViews).
+Example:
+{
+    "CommandTree": [
+        {
+            "Command": {
+                "Name": "AddViewCommand",
+                "Title": "User board",
+                "Type": "Board",
+                "BoardTemplate": {
+                    "Descriptipn": "User's board for items",
+                    "BoardRows": [
+                        { "Title": "Project 1" }, { "Title": "Project 2" }
+                    ],
+                    "BoardColumnGroups": [ 
+                        {
+                            "Title": "Input",
+                            "BoardColumns": [
+                                { "Title": "New items", "HierarchyType": "Default", "ColumnType": "New" },
+                                { "Title": "P1", "HierarchyType": "Default", "ColumnType": "New" }
+                            ]
+                        },
+                        {
+                            "Title": "Progress",
+                            "BoardColumns": [
+                                { "Title": "Doing", "HierarchyType": "Default", "ColumnType": "InProgress" },
+                                { "Title": "To-Do", "HierarchyType": "Child", "ColumnType": "New" },
+                                { "Title": "Done", "HierarchyType": "Child", "ColumnType": "Completed" }
+                            ]
+                        },
+                        {
+                            "Title": "Acceptance",
+                            "BoardColumns": [
+                                { "Title": "Done", "HierarchyType": "Default", "ColumnType": "Completed" }
+                            ]
+                        }
+                    ],
+                    "BoardViews": [
+                        { "Title": "Kanban", "ViewType": "Kanban" },
+                        { "Title": "List", "ViewType": "List" }
+                    ]
+                }
+            }
+        } 
+    ]
+}
+
 Commands schema:
 {CommandsSchema}
