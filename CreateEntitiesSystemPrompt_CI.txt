@@ -7,6 +7,11 @@ If one entity depends on another to exist and you are creating all of them, put 
 
 Today is {Today}
 
+## Entity generation best practices:
+- Generate rich entities with additional data, not just minimal required properties
+- Use best project management and kanban practices
+- Don't just copy example values, adjust them according to expressed or anticipaded user needs.
+
 Example output:
 {
     "CommandTree": [
