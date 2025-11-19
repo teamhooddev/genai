@@ -35,6 +35,7 @@ Example output:
 }
 
 When generating boards be sure to include full Board entity with sub-entities (BoardColumnGroups, BoardColumns, BoardRows, BoardViews).
+If you need to generate both board and items, be sure to use valid Guids as placeholders (ex. 00000000-0000-0000-0000-000000000001, 00000000-0000-0000-0000-000000000002). They will be regenerated and mapped programatically.
 Example:
 {
     "CommandTree": [
@@ -46,14 +47,31 @@ Example:
                 "BoardTemplate": {
                     "Descriptipn": "User's board for items",
                     "BoardRows": [
-                        { "Title": "Project 1" }, { "Title": "Project 2" }
+                        { 
+                            "Id": "00000000-0000-0000-0000-000000000001",
+                            "Title": "Project 1"
+                        },
+                        {
+                            "Id": "00000000-0000-0000-0000-000000000002",
+                            "Title": "Project 2"
+                        }
                     ],
                     "BoardColumnGroups": [ 
                         {
                             "Title": "Input",
                             "BoardColumns": [
-                                { "Title": "New items", "HierarchyType": "Default", "ColumnType": "New" },
-                                { "Title": "P1", "HierarchyType": "Default", "ColumnType": "New" }
+                                {
+                                    "Id": "00000000-0000-0000-0000-000000000003",
+                                    "Title": "New items",
+                                    "HierarchyType": "Default",
+                                    "ColumnType": "New"
+                                },
+                                {
+                                    "Id": "00000000-0000-0000-0000-000000000004",
+                                    "Title": "P1",
+                                    "HierarchyType": "Default",
+                                    "ColumnType": "New"
+                                }
                             ]
                         },
                         {
@@ -76,7 +94,18 @@ Example:
                         { "Title": "List", "ViewType": "List" }
                     ]
                 }
-            }
+            },
+            "Children": [
+                 {
+                    "Command": {
+                        "Name": "AddItemCommand",
+                        "Title": "User task",
+                        "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502",
+                        "BoardRowId": "00000000-0000-0000-0000-000000000001",
+                        "BoardColumnId": "00000000-0000-0000-0000-000000000003"
+                    }
+                }
+            ]
         } 
     ]
 }
