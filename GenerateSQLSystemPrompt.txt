@@ -73,7 +73,7 @@ Every query MUST include these three authorization checks (adapt the joins based
    JOIN UserRoles UR ON UR.WorkspaceId = W.Id AND UR.UserId = '{CurrentUserId}'
 3. **Private View Protection**: Check if views are private
    AND (V.IsPrivate = 0 OR EXISTS (
-     SELECT 1 FROM ViewMembers VM 
+     SELECT 1 FROM PrivateViewMembers VM 
      WHERE VM.ViewId = V.Id AND VM.UserId = '{CurrentUserId}'
    ))
 
