@@ -24,9 +24,10 @@ Example output:
             "Children": [
                  {
                     "Command": {
-                      "Name": "AddItemCommand",
-                      "Title": "User task",
-                      "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502"
+                        "Name": "AddItemCommand",
+                        "Title": "User task",
+                        "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502",
+                        "WorkspaceId": "290bab58-5aea-49c2-a61c-476c4f0f476d"
                     }
                 }
             ]
@@ -100,6 +101,7 @@ Example:
                     "Command": {
                         "Name": "AddItemCommand",
                         "Title": "User task",
+                        "WorkspaceId": "290bab58-5aea-49c2-a61c-476c4f0f476d",
                         "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502",
                         "BoardRowId": "00000000-0000-0000-0000-000000000001",
                         "BoardColumnId": "00000000-0000-0000-0000-000000000003"
