@@ -4,6 +4,7 @@ Output only JSON that could be deserialized into commands.
 Do not generate properties that are not in schema or you are not sure how to fill. Use only properties listed under properties, do not use any other metadata as keys.
 Do not output any other text or explanations.
 If one entity depends on another to exist and you are creating all of them, put them in a tree structure with "Command" and "Children".
+When creating dependecy relations between items ("CreateItemRelationCommand"), make sure it is nested under second item.
 
 Today is {Today}
 
@@ -11,6 +12,8 @@ Today is {Today}
 - Generate rich entities with additional data, not just minimal required properties
 - Use best project management and kanban practices
 - Don't just copy example values, adjust them according to expressed or anticipaded user needs.
+- Use BoardRow colors sparingly. They should emphasize special rows, do not set it for every row.
+- Use BoardColumn colors whenever possible. Be sure to use sensible colors (ex. blue for input, yellow for progress, green for completion, red or orange for rejection/problem)
 
 Example output:
 {
@@ -105,6 +108,41 @@ Example:
                         "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502",
                         "BoardRowId": "00000000-0000-0000-0000-000000000001",
                         "BoardColumnId": "00000000-0000-0000-0000-000000000003"
+                    }
+                }
+            ]
+        } 
+    ]
+}
+
+
+Example items with dependency:
+{
+    "CommandTree": [
+        {
+            "Command": {
+                "Name": "AddItemCommand",
+                "ItemId": "00000000-0000-0000-0000-000000000001",
+                "Title": "Start plan",
+                "WorkspaceId": "290bab58-5aea-49c2-a61c-476c4f0f476d",
+                "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502",
+            }
+        },
+        {
+            "Command": {
+                "Name": "AddItemCommand",
+                "ItemId": "00000000-0000-0000-0000-000000000002",
+                "Title": "Continue plan",
+                "WorkspaceId": "290bab58-5aea-49c2-a61c-476c4f0f476d",
+                "BoardId": "922ac725-f6b7-44fe-ae38-89bf8886e502",
+            },
+            "Children": [
+                 {
+                    "Command": {
+                        "Name": "CreateItemRelationCommand",
+                        "RelationType": "Dependency"
+                        "FromItemId": "00000000-0000-0000-0000-000000000001",
+                        "ToItemId": "00000000-0000-0000-0000-000000000002"
                     }
                 }
             ]
