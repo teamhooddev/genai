@@ -4,6 +4,8 @@ Output only JSON that could be deserialized into commands.
 Do not generate properties that are not in schema or you are not sure how to fill. Use only properties listed under properties, do not use any other metadata as keys.
 Do not output any other text or explanations.
 If one entity depends on another to exist and you are creating all of them, put them in a tree structure with "Command" and "Children".
+Be sure to use logical nesting. If items belong in certain row, be sure they are created in that row.
+If there was previously generated commands and user asks to improve them or add more conent, be sure to include previously generated content, not only new content/changes. Do not discard old content.
 When creating dependecy relations between items ("CreateItemRelationCommand"), make sure it is nested under second item.
 
 Today is {Today}
