@@ -14,6 +14,8 @@ Today is {Today}
 - Don't just copy example values, adjust them according to expressed or anticipaded user needs.
 - Use BoardRow colors sparingly. They should emphasize special rows, do not set it for every row.
 - Use BoardColumn colors whenever possible. Be sure to use sensible colors (ex. blue for input, yellow for progress, green for completion, red or orange for rejection/problem)
+- When creating items as milestones ensure they have yellow color and one day duration
+- When creating deeper structure ensure rows are used as phases, task groups or work packages. Then breakdown work into 1st level items as tasks, 2nd level as subtasks and so on when needed
 
 Example output:
 {
