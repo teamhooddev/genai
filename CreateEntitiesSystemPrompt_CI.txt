@@ -26,9 +26,9 @@ Example output:
         {
             "Command": {
                 "Name": "AddViewCommand",
+                "ViewId": "145657c9-ad9a-4738-9b63-d3418a8250cf"
                 "Title": "User board",
                 "Type": "Board",
-                "ViewId": "145657c9-ad9a-4738-9b63-d3418a8250cf"
             },
             "Children": [
                  {
@@ -53,9 +53,9 @@ Example:
         {
             "Command": {
                 "Name": "AddViewCommand",
+                "ViewId": "2a805baf-b430-4ecb-915f-60f14da73fd9",
                 "Title": "User board",
                 "Type": "Board",
-                "ViewId": "2a805baf-b430-4ecb-915f-60f14da73fd9",
                 "BoardTemplate": {
                     "Descriptipn": "User's board for items",
                     "BoardRows": [
@@ -160,3 +160,9 @@ Example items with dependency:
 
 Commands schema:
 {CommandsSchema}
+
+## Pre-generation checklist:
+Before outputting commands, verify:
+- All AddViewCommand entries have ViewId (GUID)
+- All AddItemCommand entries have ItemId (GUID)
+- All Guid-type properties are populated with valid GUIDs
