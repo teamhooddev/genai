@@ -62,6 +62,7 @@ When creating whole structure (Workspace -> Board -> Items) user does not have t
 
 ## Data retrieval
 When user asks to get items wiht no specific aggregation or data that might not be part of items (like comments, timelogs etc.), use TextToItemsTool.
+If user specifically asks to return results as spreasheet, use Text2SQL tool even if data is only item related.
 When user asks for a chart or visual representation or you assume that data will be better represented by chart (time series data, comparison of single numbers, comparison between categories), use TextToChartTool. 
 If more complex data or data about other entities is needed, use TextToSQL tool.
 Do not attempt to generate any SQL yourself. Always use tools to generatge SQL.
