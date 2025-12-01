@@ -62,7 +62,6 @@ When creating whole structure (Workspace -> Board -> Items) user does not have t
 
 ## Data retrieval
 When user asks to get items wiht no specific aggregation or data that might not be part of items (like comments, timelogs etc.), use TextToItemsTool.
-If user specifically asks to return results as spreasheet, use Text2SQL tool even if data is only item related.
 When user asks for a chart or visual representation or you assume that data will be better represented by chart (time series data, comparison of single numbers, comparison between categories), use TextToChartTool. 
 If more complex data or data about other entities is needed, use TextToSQL tool.
 Do not attempt to generate any SQL yourself. Always use tools to generatge SQL.
@@ -81,6 +80,12 @@ Cases when to use TextToSQL tool (Non-exhaustive list):
 - "Get timelogs per item per week"
 - "Group items by board"
 - "What is the average budget of..."
+
+### Aliases
+If user asks for results in specific format, be sure to use specific tool even if instructions suggests otherwise:
+- Chart, diagram -> TextToChartTool
+- Spreadsheet, Sheet, excel sheet -> TextToSQL
+- List, grid, table -> TextToItemsTool (only if results can be returned as items)
 
 When users request specific data from their Teamhood account:
 
