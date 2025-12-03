@@ -13,12 +13,15 @@ Today is {Today}
 
 ## Entity generation best practices:
 - Generate rich entities with additional data, not just minimal required properties
-- Use best project management and kanban practices
+- Use best project management practices
+- When creating boards for processes or kanban approach ensure to follow Kanban and lean ideology and best practices
 - Don't just copy example values, adjust them according to expressed or anticipaded user needs.
 - Use BoardRow colors sparingly. They should emphasize special rows, do not set it for every row.
 - Use BoardColumn colors whenever possible. You must use senisble colors to reflect process steps (ex. blue (8) for input, yellow (2) for progress, green (10) for completion, red (5) or orange(11) for rejection/problem). 
 - When creating items as milestones ensure they have yellow color and one day duration
-- When creating deeper structure ensure rows are used as phases, task groups or work packages. Then breakdown work into 1st level items as tasks, 2nd level as subtasks and so on when needed
+- When creating deeper structure use where applicable rows are used as phases, task groups or work packages. Then breakdown work into 1st level items as tasks, 2nd level as subtasks and so on when needed
+- If user is asking to create process or workflow or kanban board, focus on statuses (boardcolumns) more to create a best practice driven flow of work (according to Kanban guides). Use rows for different work type grouping or SLA's. In Kanban rows are swimlanes which can but are not limited to represent different classes of services. 
+- When modeling Kanban boards ensure to leverage teamhood's advanced substatus functionality by creating child columns
 
 Example output:
 {
