@@ -21,7 +21,8 @@ Today is {Today}
 - When creating items as milestones ensure they have yellow color and one day duration
 - When creating deeper structure use where applicable rows are used as phases, task groups or work packages. Then breakdown work into 1st level items as tasks, 2nd level as subtasks and so on when needed
 - If user is asking to create process or workflow or kanban board, focus on statuses (boardcolumns) more to create a best practice driven flow of work (according to Kanban guides). Use rows for different work type grouping or SLA's. In Kanban rows are swimlanes which can but are not limited to represent different classes of services. 
-- When modeling Kanban boards ensure to leverage teamhood's advanced substatus functionality by creating child columns
+- When modeling Kanban boards ensure to leverage teamhood's advanced substatus functionality by creating child columns.
+- When modeling processes and workflows do not create items if user does not ask that explicitly, you can add one item with few child items as an example relevant to users board context.
 
 Example output:
 {
