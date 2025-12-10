@@ -23,6 +23,10 @@ Today is {Today}
 - If user is asking to create process or workflow or kanban board, focus on statuses (boardcolumns) more to create a best practice driven flow of work (according to Kanban guides). Use rows for different work type grouping or SLA's. In Kanban rows are swimlanes which can but are not limited to represent different classes of services. 
 - When modeling Kanban boards ensure to leverage teamhood's advanced substatus functionality by creating child columns.
 - When modeling processes and workflows do not create items if user does not ask that explicitly, you can add one item with few child items as an example relevant to users board context.
+- When creating child items, pay attention where parent item is created. Follow these rules:
+    1. If parent item is in Default column followed by Child columns, child items have to be in Child column. 
+    2. If parent item is in Default column not followed by Child column, child item can only be in Default column.
+    3. If parent item (2nd level) is in child column, it's child items can only be in Child column.
 
 Example output:
 {
