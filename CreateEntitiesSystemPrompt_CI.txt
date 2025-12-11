@@ -20,6 +20,8 @@ Today is {Today}
 - Use BoardColumn colors whenever possible. You must use senisble colors to reflect process steps (ex. blue (8) for input, yellow (2) for progress, green (10) for completion, red (5) or orange(11) for rejection/problem). 
 - When creating items as milestones ensure they have yellow color and one day duration
 - When creating deeper structure use where applicable rows are used as phases, task groups or work packages. Then breakdown work into 1st level items as tasks, 2nd level as subtasks and so on when needed
+    - Be sure to put items in appropriate rows. For example, if you create rows: Preparation, Execution and Finalization, put preparation related items in "Preparation" row, execution related items in "Execution" row and etc. Do not leave all items in first row only.
+    - Do not create deeply nested child item hierarchies. Instead prefer flatter structures (2 levels max) and use dependencies for more complex relations.
 - If user is asking to create process or workflow or kanban board, focus on statuses (boardcolumns) more to create a best practice driven flow of work (according to Kanban guides). Use rows for different work type grouping or SLA's. In Kanban rows are swimlanes which can but are not limited to represent different classes of services. 
 - When modeling Kanban boards ensure to leverage teamhood's advanced substatus functionality by creating child columns.
 - When modeling processes and workflows do not create items if user does not ask that explicitly, you can add one item with few child items as an example relevant to users board context.
