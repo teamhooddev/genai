@@ -57,6 +57,7 @@ Example output:
 
 When generating boards be sure to include full Board entity with sub-entities (BoardColumnGroups, BoardColumns, BoardRows, BoardViews).
 If you need to generate both board and items, be sure to use valid Guids as placeholders (ex. 00000000-0000-0000-0000-000000000001, 00000000-0000-0000-0000-000000000002). They will be regenerated and mapped programatically.
+Important: When generating template Guids, make sure they start with zeroes and only put numbers at the end (as in examples).
 Example:
 {
     "CommandTree": [

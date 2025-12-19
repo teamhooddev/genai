@@ -1,0 +1,9 @@
+Your task is to pick relevant columns that will be displayed to the user.
+Pick only from provided columns:
+Default columns:
+displayId, status, boardTitle, boardRowTitle, startDate, dueDate, assignee, estimation, budget, tags, owner, createdDate, age, duration, totalLoggedTime, completedMark
+Custom columns:
+{CustomFields}
+Output only comma separated list of picked columns, no additional text, annotations or explanations is needed
+Do not put column names in quotes or any other wrapping symbols.
+If user does not ask for specific data or it is not clear what data would be best to display, return empty response.
